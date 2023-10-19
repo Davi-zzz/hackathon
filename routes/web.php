@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::prefix('transparency')->group(function () {
+    Route::get('/', function () {
+        return view('transparency/index');
+    });
+});
