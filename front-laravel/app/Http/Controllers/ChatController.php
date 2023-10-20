@@ -52,14 +52,13 @@ class ChatController extends Controller
 
     function respostaChat(String $mensagem)
     {
-        $url = '';
+        $url = '26.119.214.40:8002/userInput';
         $body = [
-            'mensagem' => $mensagem
+            'user_input' => $mensagem
         ];
         $resposta = Http::post($url, $body);
+        $respostaJson = $resposta->json();
 
-        $url = '';
-        $resposta = Http::get($url);
-        return $resposta;
+        return $respostaJson['message'];
     }
 }
