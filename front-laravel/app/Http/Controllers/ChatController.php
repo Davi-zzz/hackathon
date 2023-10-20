@@ -52,9 +52,14 @@ class ChatController extends Controller
 
     function respostaChat(String $mensagem)
     {
-        // $url = '';
-        // $resposta = Http::get($url);
-        // return $resposta;
-        return 'Olá, eu sou o check bot.';
+        $url = '';
+        $body = [
+            'mensagem' => $mensagem
+        ];
+        $resposta = Http::post($url, $body);
+
+        $url = '';
+        $resposta = Http::get($url);
+        return $resposta;
     }
 }
