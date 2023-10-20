@@ -12,7 +12,7 @@ app.get("/", async (req, res) => {
     res.send(result);
 });
 
-app.listen(port, '26.66.209.67', () => {
+app.listen(port, 'localhost', () => {
     console.log("running on http://26.66.209.67:3000");
 });
 
