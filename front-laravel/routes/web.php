@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Resources\TransparencyService;
+
+use App\Http\Controllers\TransparencyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::prefix('transparency')->group(function () {
-    Route::get('/', function () {
-        return view('transparency/index');
-    });
-});
+    Route::get('/', [TransparencyController::class, 'index']);
+    Route::get('/results', [TransparencyController::class, 'webScrapingResult'])->name('transparency.results');
+    Route::get('/testes', [TransparencyController::class, 'testes']);
+   });

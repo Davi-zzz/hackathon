@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransparencyModel;
+use App\Http\services\TransparencyServices;
 use Illuminate\Http\Request;
 
-class TransparencyController extends Controller
+class TransparencyController
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function testes()
+    {
+        TransparencyServices::testeGetWebContent();
+    }
     public function index()
     {
         //
+        return view('transparency/index');
     }
 
     /**
@@ -23,6 +26,11 @@ class TransparencyController extends Controller
         //
     }
 
+    public function webScrapingResult()
+    {
+        $data = TransparencyServices::getWebContent();
+        return view('transparency/scrapingResult', $data);
+    }
     /**
      * Store a newly created resource in storage.
      */
