@@ -12,7 +12,7 @@ class ChatController extends Controller
         // Exemplo de mensagens, uma apresentação do chatbot para o usuário. Ensinando como começar a utilizar o chatbot.
         // Para usar é só inserir a mensagem no campo abaixo e enviar.
         $exemploMensagens = [
-            'Olá, eu sou o check bot do exemplo.',
+            'Olá, eu sou o check bot.',
             'Para começar a conversar comigo, digite uma mensagem no campo abaixo e clique em enviar.',
         ];
         return view('chat.index', ['mensagens' => $exemploMensagens]);
@@ -30,8 +30,18 @@ class ChatController extends Controller
         $mensagens = $request->session()->get('mensagens', []);
 
         // Adicione a nova mensagem ao array
-        $mensagens[] = $mensagem;
-        $mensagens[] = $this->respostaChat($mensagem);
+        $mensagemUsuario = [
+            "mensagem" => $mensagem,
+            "data" => date("d/m/Y H:i:s"),
+            "tipo" => "usuario"
+        ];
+        $mensagemBot = [
+            "mensagem" => $this->respostaChat($mensagem),
+            "data" => date("d/m/Y H:i:s"),
+            "tipo" => "bot"
+        ];
+        array_push($mensagens, $mensagemUsuario);
+        array_push($mensagens, $mensagemBot);
 
         // Salve o array atualizado na sessão
         $request->session()->put('mensagens', $mensagens);
@@ -42,8 +52,9 @@ class ChatController extends Controller
 
     function respostaChat(String $mensagem)
     {
-        $url = '';
-        $resposta = Http::get($url);
-        return $resposta;
+        // $url = '';
+        // $resposta = Http::get($url);
+        // return $resposta;
+        return 'Olá, eu sou o check bot.';
     }
 }

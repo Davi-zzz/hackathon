@@ -47,10 +47,17 @@
             box-sizing: border-box;
         }
 
+        .usuario {
+            align-items: flex-end;
+        }
+
+        .bot {
+            align-items: flex-start;
+        }
+
         .chat-message {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
             margin-bottom: 10px;
         }
 
@@ -111,20 +118,24 @@
         </div>
         <div class="chat-messages">
             @foreach ($mensagens as $mensagem)
-            <div class="chat-message">
-                <div class="message-text">{{ $mensagem }}</div>
-                <div class="message-time">10:00</div>
+            @if ($mensagem['tipo'] == 'usuario')
+            <div class="chat-message usuario">
+                @else
+                <div class="chat-message bot">
+                    @endif
+                    <div class="message-text">{{ $mensagem['mensagem'] }}</div>
+                    <div class="message-time">{{ $mensagem['data'] }}</div>
+                </div>
+                @endforeach
             </div>
-            @endforeach
+            <form action="enviarMensagem" method="POST">
+                @csrf
+                <div class="chat-input">
+                    <input type="text" id="mensagem" name="mensagem" placeholder="Digite sua mensagem...">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
         </div>
-        <form action="enviarMensagem" method="POST">
-            @csrf
-            <div class="chat-input">
-                <input type="text" id="mensagem" name="mensagem" placeholder="Digite sua mensagem...">
-                <button type="submit">Enviar</button>
-            </div>
-        </form>
-    </div>
 </body>
 
 </html>
