@@ -8,8 +8,8 @@ app.get("/", async (req, res) => {
     //TODO:
     console.log(req.body);
     // await scrapper(req.body.data['keys']);
-    await scrapper(req.body.keys);
-    res.send("test");
+    const result = await scrapper(req.body.keys);
+    res.send(result);
 });
 
 app.listen(port, '26.66.209.67', () => {
@@ -120,4 +120,5 @@ async function scrapper(searchString) {
     console.log(data);
 
     await browser.close();
+    return data;
 }
