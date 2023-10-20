@@ -8,7 +8,7 @@ app.get("/", async (req, res) => {
     //TODO:
     console.log(req.body);
     // await scrapper(req.body.data['keys']);
-    const result = await scrapper(req.body.keys);
+    const result = await scrapper(req.body['keys']);
     res.send(result);
 });
 
