@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Resources\TransparencyService;
-
 use App\Http\Controllers\TransparencyController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::prefix('transparency')->group(function () {
-    Route::get('/', [TransparencyController::class, 'index']);
-    Route::get('/results', [TransparencyController::class, 'webScrapingResult'])->name('transparency.results');
-    Route::get('/testes', [TransparencyController::class, 'testes']);
-   });
+Route::get('/', [ChatController::class, 'index']);
+Route::post('/enviarMensagem', [ChatController::class, 'enviarMensagem']);
